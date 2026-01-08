@@ -21,7 +21,7 @@ RUN ls -R /usr/src/app/dist
 
 # Replace 'YOUR_PROJECT_NAME' with the 'name' from your package.json
 #COPY --from=build /usr/src/app/dist/tasks/browser /usr/share/nginx/html
-COPY --from=build /usr/src/app/dist/tasks/browser /usr/share/nginx/html
+COPY --from=build /usr/src/app/dist/todo2/browser /usr/share/nginx/html
 
 
 
