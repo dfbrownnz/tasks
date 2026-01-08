@@ -17,7 +17,7 @@ FROM nginx:alpine
 COPY nginx.conf /etc/nginx/nginx.conf 
 
 # Replace 'YOUR_PROJECT_NAME' with the 'name' from your package.json
-COPY --from=build /usr/src/app/dist/my-app/browser /usr/share/nginx/html
+COPY --from=build /usr/src/app/dist/tasks/browser /usr/share/nginx/html
 
 # Optional: Copy a custom nginx.conf if you use Angular Routing
 # COPY nginx.conf /etc/nginx/conf.d/default.conf
