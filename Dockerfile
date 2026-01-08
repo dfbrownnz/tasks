@@ -9,7 +9,7 @@ RUN npm install
 # Copy source code and build for production
 COPY . .
 RUN npm run build --configuration=production
-RUN ls -R dist/
+# RUN ls -R dist/
 
 # STAGE 2: Serve with Nginx
 FROM nginx:alpine
@@ -17,7 +17,7 @@ FROM nginx:alpine
 # Copy the custom nginx configuration file
 COPY nginx.conf /etc/nginx/nginx.conf 
 
-RUN ls -R /usr/src/app/dist
+# RUN ls -R /usr/src/app/dist
 
 # Replace 'YOUR_PROJECT_NAME' with the 'name' from your package.json
 #COPY --from=build /usr/src/app/dist/tasks/browser /usr/share/nginx/html
