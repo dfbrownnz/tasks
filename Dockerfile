@@ -19,6 +19,8 @@ COPY nginx.conf /etc/nginx/nginx.conf
 # Replace 'YOUR_PROJECT_NAME' with the 'name' from your package.json
 COPY --from=build /usr/src/app/dist/tasks/browser /usr/share/nginx/html
 
+
+
 # Optional: Copy a custom nginx.conf if you use Angular Routing
 # COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Add this line to change the default port from 80 to 8080
