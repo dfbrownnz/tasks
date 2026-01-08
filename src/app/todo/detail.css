@@ -1,0 +1,24 @@
+/* Fix the form layout */
+.edit-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  padding: 20px;
+  background: #f9f9f9;
+}
+
+/* Make Description span the full width */
+.description-field {
+  grid-column: 1 / -1;
+}
+
+/* Fix the table spacing */
+.styled-table th, .styled-table td {
+  padding: 12px;
+  border-right: 1px solid #eee; /* Adds separation between columns */
+  text-align: left;
+}
+
+.styled-table td:last-child {
+  border-right: none;
+}

@@ -1,5 +1,5 @@
 import { Component, inject, Input, SimpleChanges } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -15,8 +15,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-task-form',
   standalone: true,
-  imports: [ReactiveFormsModule, MatInputModule, MatButtonModule, MatFormFieldModule, CommonModule, MatCardModule],
+  imports: [ReactiveFormsModule, MatInputModule, MatButtonModule, MatFormFieldModule, CommonModule, MatCardModule , FormsModule],
   templateUrl: './form.html',
+  styleUrls: ['./form.css']
   
 })
 export class TaskFormComponent {
@@ -24,8 +25,7 @@ export class TaskFormComponent {
 
   private projectService = inject(ProjectService);
 
-  @Input() selectedRowData: any;
-  // Initialize the form with fields matching your data keys
+   // Initialize the form with fields matching your data keys
   projectForm = this.fb.group({
     ProjectId: [''],
     Id: [''],
@@ -37,14 +37,19 @@ export class TaskFormComponent {
     StatusDate: ['']
   });
 
+  @Input() selectedRowFormData: any;
+
+  
+ 
+
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['selectedRowData'] && changes['selectedRowData'].currentValue) {
+    if (changes['selectedRowFormData'] && changes['selectedRowFormData'].currentValue) {
       console.log('ngOnChanges triggered');
-      this.projectForm.patchValue(changes['selectedRowData'].currentValue);
+      this.projectForm.patchValue(changes['selectedRowFormData'].currentValue);
     }
   }
-  // 1. You must add the @Input decorator here to clear the error
-  @Input() set selectedRow(data: any) {
+  // 1. You must add the @Input decorator here to clear the error @Input() selectedRowData: any;
+  @Input() set selectedRowForm(data: any) {
     console.log('Populating form with:', data);
     if (data) {
       console.log('Form receiving data:', data);
@@ -68,7 +73,7 @@ export class TaskFormComponent {
 
   async onSave() {
 
-    const ex = { ...this.projectForm.getRawValue(), ProjectId: this.selectedRowData.ProjectId };
+    const ex = { ...this.projectForm.getRawValue(), ProjectId: this.selectedRowFormData.ProjectId };
     
     (await
 
@@ -83,7 +88,7 @@ export class TaskFormComponent {
           this.queryClient.invalidateQueries({ queryKey: ['projects'] });
 
           // 3. Optional: Clear the selection state in the parent
-          this.selectedRowData = null;
+          this.selectedRowFormData = null;
 
           // Trigger Success Toast
           this.snackBar.open('Saved successfully!', 'OK', {

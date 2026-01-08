@@ -1,17 +1,20 @@
-import { Component, input, inject, computed } from '@angular/core';
+import { Component, input, inject, computed, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { injectQuery } from '@tanstack/angular-query-experimental';
 import { lastValueFrom } from 'rxjs';
 import { ProjectService } from '../core/project.service'
 import { TaskFormComponent } from './form'
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-todo-detail-table',
   standalone: true,
-  imports: [ TaskFormComponent ],
-  templateUrl: `detail.html`
+  imports: [ TaskFormComponent , JsonPipe ],
+  templateUrl: `detail.html`,
+  styleUrls: ['detail.css']
 })
 export class TodoDetailTableComponent {
+ 
   private http = inject(HttpClient);
   private projectService = inject(ProjectService);
 
@@ -25,9 +28,12 @@ export class TodoDetailTableComponent {
     enabled: !!this.selectedProjectId(), // Only run if 'bob' is found
   }));
 
-  selectedRowData: any;
+  clickedRow: any;
+  //selectedRowData = signal<any>({});
   onRowClick(row: any) {
     console.log('Task Detail one Task | Row clicked:', row);
-    this.selectedRowData = row;
+    //this.selectedRowData = row;
+    this.clickedRow = row;
+    //this.selectedRowData.set(row);
   }
 }

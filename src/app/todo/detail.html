@@ -44,7 +44,13 @@
 
       }
     </div>
-    <div>
-      <app-task-form [selectedRowData]="selectedRowData()" />
+<div class="pm-container">
+
+      <!-- {{ clickedRow | json }} -->
+      
+      <!-- logFormValues -->
+      <!-- <app-task-form [selectedRowData]="selectedRowFormData()" /> -->
+       <app-task-form [selectedRowFormData]="clickedRow" />
+       
     </div>
   

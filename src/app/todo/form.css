@@ -1,0 +1,73 @@
+/* Fix the form layout */
+.edit-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  padding: 20px;
+  background: #f9f9f9;
+}
+
+/* Make Description span the full width */
+.description-field {/* detail.css */
+.edit-task-container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.task-grid-form {
+  display: grid;
+  /* Creates 3 equal columns that wrap on smaller screens */
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 20px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.form-field input, .form-field textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+/* Makes the description and button take up all columns */
+.full-width, .form-actions {
+  grid-column: 1 / -1;
+}
+
+.submit-btn {
+  background-color: #0061c1;
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+  grid-column: 1 / -1;
+}
+
+/* Fix the table spacing */
+.styled-table th, .styled-table td {
+  padding: 12px;
+  border-right: 1px solid #eee; /* Adds separation between columns */
+  text-align: left;
+}
+
+.styled-table td:last-child {
+  border-right: none;
+}
