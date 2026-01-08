@@ -1,0 +1,46 @@
+<div style="border: 1px solid #ccc; padding: 15px; margin-top: 20px;">
+      <h4>User Details  {{ selectedProjectId() }} param passed in by property from parent to child</h4>
+      @if (userQuery.isPending()) { <p>Loading user selectedProjectId {{ selectedProjectId() }}...</p> }
+      @if (userQuery.data(); as user) {
+        <!-- <p><strong>Name:</strong> {{ user.name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p> -->
+
+        <div class="summary-container">
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>Project ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Group</th>
+        <th>Owner</th>
+        <th>Status</th>
+        <th>Status Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (todo of userQuery.data(); track todo.Id) {
+        <tr (click)="onRowClick(todo)" class="clickable-row">
+          <td>{{ todo.ProjectId }}</td>
+          <td>{{ todo.Name }}</td>
+          <td>{{ todo.Description }}</td>
+          <td>{{ todo.Group }}</td>
+          <td>{{ todo.Owner }}</td>
+          <td>
+            <span [class.status-flag]="todo.StatusFlag">
+              {{ todo.StatusFlag }}
+            </span>
+          </td>
+          <td>{{ todo.StatusDate }}</td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="7">No tasks found.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+      }
+    </div>

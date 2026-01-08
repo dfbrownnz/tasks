@@ -1,0 +1,62 @@
+.summary-container {
+  display: flex;
+  gap: 20px;
+  padding: 15px 0;
+}
+
+.stat-card {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 15px 25px;
+  border-radius: 8px;
+  text-align: center;
+  min-width: 120px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.label { display: block; font-size: 0.9rem; color: #666; }
+.value { font-size: 1.5rem; font-weight: bold; }
+.pending { color: #d9534f; } /* Red */
+.completed { color: #5cb85c; } /* Green */
+
+.table-container {
+  margin: 20px 0;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: sans-serif;
+  font-size: 0.9em;
+}
+
+.styled-table thead tr {
+  background-color: #2196F3;
+  color: #ffffff;
+  text-align: left;
+}
+
+.styled-table th, .styled-table td {
+  padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid rgb(173, 192, 230);
+}
+
+/* Specific styling for status labels */
+td:contains("In Progress") {
+  color: #2196F3;
+  font-weight: bold;
+}

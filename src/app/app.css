@@ -1,0 +1,178 @@
+.project-badge {
+  font-size: 12px;
+  color: #1a73e8;
+  background: #e8f0fe;
+  padding: 4px 12px;
+  border-radius: 16px;
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  background: white;
+  border-bottom: 1px solid #dadce0;
+  height: 64px;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  min-width: 232px;
+}
+
+.menu-icon {
+  background: none;
+  border: none;
+  padding: 12px;
+  margin-right: 4px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.menu-icon:hover { background-color: #f1f3f4; }
+
+.app-title {
+  font-size: 22px;
+  color: #5f6368;
+  margin-left: 8px;
+}
+
+.nav-center {
+  flex: 1;
+  max-width: 720px;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #f1f3f4;
+  padding: 0 12px;
+  border-radius: 8px;
+  height: 48px;
+}
+
+.search-box input {
+  background: transparent;
+  border: none;
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  outline: none;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-left: 30px;
+}
+
+.active-project-tag {
+  background: #e8f0fe;
+  color: #1a73e8;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  background: #1a73e8;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+  .app-container {
+  display: flex;
+  height: 100vh;
+  background-color: #fff;
+}
+
+.left-menu {
+  width: 256px;
+  padding: 12px 8px 12px 0; /* Google menus usually touch the left edge */
+  border-right: 1px solid #f1f3f4;
+}
+
+.left-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.left-menu li {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding-left: 24px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #3c4043;
+  border-radius: 0 24px 24px 0; /* The "Pill" shape on the right */
+  margin-bottom: 4px;
+  transition: background-color 0.2s;
+}
+
+/* Hover State */
+.left-menu li:hover {
+  background-color: #f1f3f4;
+}
+
+ 
+/* .left-menu li.active {
+  background-color: #e8f0fe;
+  color: #1967d2;
+  font-weight: 500;
+}
+
+.left-menu.collapsed {
+  width: 120px; 
+  padding: 0;
+} */
+
+.left-menu {
+  width: 50px; /* Collapsed width */
+  
+  padding: 10px;
+  transition: width 0.3s ease-in-out;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.left-menu:not(.collapsed) {
+  width: 150px; /* Expanded width */
+  padding: 10px;
+}
+
+.main-content {
+  flex-grow: 1; /* Main content takes up remaining space */
+  padding: 20px;
+    overflow-y: auto;
+}
+
+.material-icons {
+  margin-right: 18px;
+  font-size: 20px;
+  color: inherit;
+}
+
+/* .main-content {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+} */

@@ -1,0 +1,103 @@
+<!-- <pre>{{ projectList.data() | json }}</pre>
+Total Records: {{ projectList.data()?.length ?? 0 }} -->
+
+<div class="m-6 overflow-hidden rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+  <h2 class="mb-4 text-lg font-medium text-gray-700">Asign Projects to a Project Manager</h2>
+  <ul class="flex flex-col gap-2">
+    <h2> Project list is where you choose project-owner and list-name to url </h2>
+    <li class="flex items-center gap-2">project-owner-list people in Pm - Owner. Not Task Owner </li>
+    <li class="flex items-center gap-2">project-active-list projects in scope - Value. Copy template to new.</li>
+    <li class="flex items-center gap-2">project-active-list (Value) is assigned project-owner-list (Owner) for a list name </li>
+    <li class="flex items-center gap-2"> This is expected delivery date  </li>
+  </ul>
+  
+  <form [formGroup]="projectForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Owner</mat-label>
+      <input matInput formControlName="Owner" placeholder="e.g. project-to-pm">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="Name" placeholder="e.g. dave">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Values</mat-label>
+      <input matInput formControlName="Values" placeholder="e.g. 1,2">
+      <mat-hint>Separate values with commas</mat-hint>
+    </mat-form-field>
+
+    <div class="mt-4 flex justify-end gap-2">
+      <button mat-button type="button" (click)="projectForm.reset()">Cancel</button>
+      <button mat-flat-button color="primary" type="submit" [disabled]="!projectForm.valid">
+        Save Project
+      </button>
+    </div>
+  </form>
+</div>
+<p></p>
+
+
+<div class="mb-4 flex items-center gap-4">
+  <mat-form-field appearance="outline" class="w-full max-w-xs">
+    <mat-label>Filter by Owner</mat-label>
+    <input 
+      matInput 
+      [value]="globalFilter()" 
+      (input)="globalFilter.set($any($event.target).value)"
+      placeholder="Type a name..."
+    >
+    
+    @if (globalFilter()) {
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="clearFilter()">
+        <mat-icon>close</mat-icon>
+      </button>
+    } @else {
+      <mat-icon matSuffix>search</mat-icon>
+    }
+  </mat-form-field>
+
+  @if (globalFilter()) {
+    <button mat-button color="warn" (click)="clearFilter()">
+      Clear Filter
+    </button>
+  }
+</div>
+
+<p></p>
+<div class="table-container">
+  <table>
+    <thead>
+      @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
+        <tr>
+          @for (header of headerGroup.headers; track header.id) {
+            <th>
+              <ng-container *flexRender="header.column.columnDef.header; props: header.getContext(); let headerValue">
+                {{ headerValue }}
+              </ng-container>
+            </th>
+          }
+        </tr>
+      }
+    </thead>
+    <tbody>
+      @for (row of table.getRowModel().rows; track row.id) {
+        <tr
+        (click)="onRowClick(row.original)" 
+      class="transition-colors hover:bg-gray-50 cursor-pointer">
+          @for (cell of row.getVisibleCells(); track cell.id) {
+            <td>
+              <ng-container *flexRender="cell.column.columnDef.cell; props: cell.getContext(); let cellValue">
+                {{ cellValue }}
+              </ng-container>
+            </td>
+          }
+        </tr>
+      }
+    </tbody>
+  </table>
+  <div class="table-footer">
+    Total Records: {{ tableData().length }}
+  </div>
+</div>
