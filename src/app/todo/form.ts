@@ -13,13 +13,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
-  selector: 'app-project-form',
+  selector: 'app-task-form',
   standalone: true,
   imports: [ReactiveFormsModule, MatInputModule, MatButtonModule, MatFormFieldModule, CommonModule, MatCardModule],
   templateUrl: './form.html',
   
 })
-export class MyProjectsFormComponent {
+export class TaskFormComponent {
   private fb = inject(FormBuilder);
 
   private projectService = inject(ProjectService);

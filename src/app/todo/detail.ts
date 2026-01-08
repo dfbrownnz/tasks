@@ -3,10 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { injectQuery } from '@tanstack/angular-query-experimental';
 import { lastValueFrom } from 'rxjs';
 import { ProjectService } from '../core/project.service'
+import { TaskFormComponent } from './form'
 
 @Component({
   selector: 'app-todo-detail-table',
   standalone: true,
+  imports: [ TaskFormComponent ],
   templateUrl: `detail.html`
 })
 export class TodoDetailTableComponent {
@@ -23,9 +25,9 @@ export class TodoDetailTableComponent {
     enabled: !!this.selectedProjectId(), // Only run if 'bob' is found
   }));
 
-  clickedRow: any;
+  selectedRowData: any;
   onRowClick(row: any) {
     console.log('Task Detail one Task | Row clicked:', row);
-    this.clickedRow = row;
+    this.selectedRowData = row;
   }
 }
