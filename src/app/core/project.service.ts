@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
+import { TodoSummary } from './types';
 // import { environment } from '../../environments/environment';
 import { environment } from '../../environment/environment'
 

@@ -67,10 +67,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "tasks:build:production"
+              "buildTarget": "todo2:build:production"
             },
             "development": {
-              "buildTarget": "tasks:build:development"
+              "buildTarget": "todo2:build:development"
             }
           },
           "defaultConfiguration": "development"
