@@ -85,7 +85,12 @@ export class TaskFormComponent {
           this.projectForm.reset();
 
           // 2. Refresh the table data
-          this.queryClient.invalidateQueries({ queryKey: ['projects'] });
+          //this.queryClient.invalidateQueries({ queryKey: ['projects'] });
+          this.queryClient.invalidateQueries({ queryKey: ['todo-detail', this.selectedRowFormData.ProjectId] });
+          this.queryClient.invalidateQueries({ queryKey: [  'todo-summary' ] });
+
+          // 'todo-summary'
+          // 'todo-detail', this.selectedRowFormData.ProjectId
 
           // 3. Optional: Clear the selection state in the parent
           this.selectedRowFormData = null;
