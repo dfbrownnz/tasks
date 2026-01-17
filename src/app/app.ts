@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common'; // 1. Import CommonModule
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 
-import { TodoSummaryTableComponent } from "./todo/summary";
+import { TodoSummaryTableComponent } from "./todo/pm-owner";
 import { ProjectList } from "./project/projects";
 
 

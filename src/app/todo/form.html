@@ -1,16 +1,15 @@
-<div class="bg-gray-100 min-h-screen p-8 flex justify-center">
+<!-- <div class="bg-gray-100 min-h-screen p-2 flex justify-center"> -->
+    <div>
+    
     <!-- {{ selectedRowFormData | json }} -->
 
-    <mat-card class="max-w-2xl w-full p-6">
-        <mat-card-header>
-            <mat-card-title class="text-3xl font-normal border-b-8 border-purple-700 pb-4 mb-6"> Edit Task Details
-            </mat-card-title>
-        </mat-card-header>
+    <!-- <mat-card class="max-w-2xl w-full p-8 mx-auto"> -->
+        <mat-card > 
 
         <mat-card-content>
             <form [formGroup]="projectForm">
 
-                <div class="grid grid-cols-6 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                     <mat-form-field appearance="outline">
                         <mat-label>Project</mat-label>
                         <input matInput formControlName="ProjectId">

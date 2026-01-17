@@ -1,0 +1,9 @@
+<p>task-owner works!</p>
+<mat-form-field appearance="outline">
+    <mat-label>Owner</mat-label>
+    <mat-select formControlName="Owner" (selectionChange)="onOwnerSelected($event)">
+        @for (owner of owners; track owner) {
+        <mat-option [value]="owner">{{ owner }}</mat-option>
+        }
+    </mat-select>
+</mat-form-field>

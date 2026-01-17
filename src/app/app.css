@@ -105,7 +105,8 @@
 
 .left-menu {
   width: 256px;
-  padding: 12px 8px 12px 0; /* Google menus usually touch the left edge */
+  padding: 12px 8px 12px 10px;
+  background-color: #fff ; /* Google menus usually touch the left edge */
   border-right: 1px solid #f1f3f4;
 }
 

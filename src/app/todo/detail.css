@@ -12,6 +12,18 @@
   grid-column: 1 / -1;
 }
 
+/* Make the table as wide as the screen will allow */
+.styled-table {
+  width: 100%;
+}
+/* Make the description field as wide as the screen will allow in the table */
+.styled-table .description-cell {
+  width: 100%;
+}
+/* Ensure status flag column is not too narrow  status-flag*/
+.styled-table .status-flag-cell {
+  width: 150px;
+}
 /* Fix the table spacing */
 .styled-table th, .styled-table td {
   padding: 12px;
@@ -21,4 +33,8 @@
 
 .styled-table td:last-child {
   border-right: none;
+}
+
+.styled-table tbody tr:hover {
+  background-color: #e0e0e0; /* Light grey background on hover */
 }

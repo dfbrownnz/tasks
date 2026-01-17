@@ -1,7 +1,6 @@
-
 <div class="app-wrapper">
 
-    <header class="top-nav">
+  <header class="top-nav">
     <div class="nav-left">
 
       <span class="app-title">Todos</span>
@@ -32,7 +31,7 @@
   </header>
 
 
-<!-- <app-todo-summary-table>  </app-todo-summary-table>
+  <!-- <app-todo-summary-table>  </app-todo-summary-table>
 <app-project-list> </app-project-list> -->
 
 
@@ -47,7 +46,7 @@
             [queryParams]="{ projectId: currentProjectId, projectOwner: projectOwner , projectList: projectList }"
             routerLinkActive="active">
             <span class="material-icons">list</span>
-            <span *ngIf="!isSidebarCollapsed">Projects</span>
+            <span *ngIf="!isSidebarCollapsed">Projects Assigned</span>
           </li>
 
           <!-- <li routerLink="/users" [queryParams]="{ projectId: currentProjectId }" routerLinkActive="active">
@@ -58,17 +57,25 @@
             [queryParams]="{ projectId: currentProjectId, projectOwner: projectOwner , projectList: projectList }"
             routerLinkActive="active">
             <span class="material-icons">list_alt</span>
-            <span *ngIf="!isSidebarCollapsed">Tasks </span>
+            <span *ngIf="!isSidebarCollapsed">Project Owner </span>
           </li>
-<!-- 
+
+
+          <li [routerLink]="['/task-owner']"
+            [queryParams]="{ projectId: currentProjectId, projectOwner: projectOwner , projectList: projectList }"
+            routerLinkActive="active">
+            <span class="material-icons">check_box</span>
+            <span *ngIf="!isSidebarCollapsed">Task Owner </span>
+          </li>
+          <!-- 
                     <li [routerLink]="['/project']"
             [queryParams]="{ projectId: currentProjectId, projectOwner: projectOwner , projectList: projectList }"
             routerLinkActive="active">
             <span class="material-icons">list_alt</span>
             <span *ngIf="!isSidebarCollapsed">Tasks tasks </span>
           </li> -->
- 
- 
+
+
         </ul>
       </nav>
     </aside>
