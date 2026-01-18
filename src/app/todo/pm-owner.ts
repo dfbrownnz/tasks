@@ -18,17 +18,16 @@ import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 @Component({
   selector: 'app-todo-summary-table',
   standalone: true,
-  imports: [TodoDetailTableComponent, FormsModule],
+  imports: [TodoDetailTableComponent, FormsModule , JsonPipe ],
   templateUrl: './pm-owner.html',
   styleUrls: ['./pm-owner.css']
 })
 export class TodoSummaryTableComponent {
 
  
-
-  selectedProjectId = signal('1');
   private route = inject(ActivatedRoute);
-  
+
+  selectedProjectId = signal('0');
   selectedGroup = signal('approval');
 
   constructor(private router: Router) { }

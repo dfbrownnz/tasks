@@ -1,0 +1,61 @@
+<div style="border: 1px solid #ccc; padding: 15px; margin-top: 20px;">
+  <h4>User Details {{ projectListName() }} param passed in by property from parent to  projectOwner {{projectOwner()}} and taskOwner {{ taskOwnerFromRoute() }}  </h4>
+  @if (userQuery.isPending()) { <p>Loading user selectedProjectId {{ projectListName() }}...</p> }
+  @if (userQuery.data(); as user) {
+    <!-- <p> {{userQuery.data() | json}} </p> -->
+  <!-- <p><strong>Name:</strong> {{ user.name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p> -->
+
+  <div class="summary-container">
+    <table class="styled-table">
+      <thead>
+        <tr class="w-full">
+          <th>Project ID</th>
+          <th>Task Id</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Group</th>
+          <th>Owner</th>
+          <th>Status</th>
+          <th>Status Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        @for (todo of userQuery.data(); track todo.projectId + '-' + todo.id) {
+        <!-- @for (todo of querykey.data() ; track todo.projectId + '-' + todo.id) { -->
+        <tr (click)="onRowClick(todo)" class="clickable-row">
+          <td>{{ todo.projectId }}</td>
+          <td>{{ todo.id }}</td>
+          <td>{{ todo.name }}</td>
+          <!-- <td><pre>{{ todo.Description }}</pre></td> -->
+          <td>{{ todo.description }} </td>
+          <td>{{ todo.group }}</td>
+          <td>{{ todo.owner }}</td>
+          <td>
+            <span [class.status-flag]="todo.statusFlag">
+              {{ todo.statusFlag }}
+            </span>
+          </td>
+          <td>{{ todo.statusDate }}</td>
+        </tr>
+        } @empty {
+        <tr>
+          <td colspan="7">No tasks found.</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  }
+</div>
+<div style="border: 1px solid #ccc; padding: 15px; margin-top: 20px;">
+
+  <!-- {{ clickedRow | json }} -->
+
+  <!-- logFormValues -->
+  <!-- <app-task-form [selectedRowData]="selectedRowFormData()" /> -->
+  <app-task-form [selectedRowFormData]="clickedRow" class="w-full max-w-none" />
+
+</div>

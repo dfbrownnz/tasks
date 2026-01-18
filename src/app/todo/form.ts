@@ -15,17 +15,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-task-form',
   standalone: true,
-  imports: [ReactiveFormsModule, MatInputModule, MatButtonModule, MatFormFieldModule, CommonModule, MatCardModule , FormsModule],
+  imports: [ReactiveFormsModule, MatInputModule, MatButtonModule, MatFormFieldModule, CommonModule, MatCardModule, FormsModule],
   templateUrl: './form.html',
   styleUrls: ['./form.css']
-  
+
 })
 export class TaskFormComponent {
   private fb = inject(FormBuilder);
 
   private projectService = inject(ProjectService);
 
-   // Initialize the form with fields matching your data keys
+  // Initialize the form with fields matching your data keys  ProjectId: [''],
   projectForm = this.fb.group({
     ProjectId: [''],
     Id: [''],
@@ -39,13 +39,32 @@ export class TaskFormComponent {
 
   @Input() selectedRowFormData: any;
 
-  
- 
+
+
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['selectedRowFormData'] && changes['selectedRowFormData'].currentValue) {
-      console.log('ngOnChanges triggered');
-      this.projectForm.patchValue(changes['selectedRowFormData'].currentValue);
+      // console.log('form | ngOnChanges triggered', changes['selectedRowFormData'].currentValue);
+      if(changes['selectedRowFormData'].currentValue.projectId === undefined  )
+      {
+        this.projectForm.patchValue(changes['selectedRowFormData'].currentValue); 
+      }
+      else{
+
+          this.projectForm.patchValue({
+        ProjectId:  changes['selectedRowFormData'].currentValue.projectId,
+        Id: changes['selectedRowFormData'].currentValue.id,
+        Description: changes['selectedRowFormData'].currentValue.description,
+        Name: changes['selectedRowFormData'].currentValue.name,
+        Group: changes['selectedRowFormData'].currentValue.group,
+        Owner: changes['selectedRowFormData'].currentValue.owner,
+        StatusFlag: changes['selectedRowFormData'].currentValue.statusFlag,
+        StatusDate: changes['selectedRowFormData'].currentValue.statusDate
+      });
+
+      }
+    
+
     }
   }
   // 1. You must add the @Input decorator here to clear the error @Input() selectedRowData: any;
@@ -54,7 +73,7 @@ export class TaskFormComponent {
     if (data) {
       console.log('Form receiving data:', data);
       this.projectForm.patchValue(data); // Auto-fills the form
-         }
+    }
   }
 
 
@@ -74,7 +93,7 @@ export class TaskFormComponent {
   async onSave() {
 
     const ex = { ...this.projectForm.getRawValue(), ProjectId: this.selectedRowFormData.ProjectId };
-    
+
     (await
 
       this.projectService.saveTodos(ex)).subscribe({
@@ -87,7 +106,7 @@ export class TaskFormComponent {
           // 2. Refresh the table data
           //this.queryClient.invalidateQueries({ queryKey: ['projects'] });
           this.queryClient.invalidateQueries({ queryKey: ['todo-detail', this.selectedRowFormData.ProjectId] });
-          this.queryClient.invalidateQueries({ queryKey: [  'todo-summary' ] });
+          this.queryClient.invalidateQueries({ queryKey: ['todo-summary'] });
 
           // 'todo-summary'
           // 'todo-detail', this.selectedRowFormData.ProjectId

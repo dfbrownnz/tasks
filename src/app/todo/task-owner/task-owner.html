@@ -1,4 +1,4 @@
-<p>task-owner works!</p>
+<p>task-owner works! Get projects for Owner {{ this.projectOwner() }} with list Project List {{ this.projectListName()}} then filter by taskOwner value {{ this.taskOwnerFromRoute() }} </p>
 <mat-form-field appearance="outline">
     <mat-label>Owner</mat-label>
     <mat-select formControlName="Owner" (selectionChange)="onOwnerSelected($event)">
@@ -7,3 +7,20 @@
         }
     </mat-select>
 </mat-form-field>
+<!-- {{ this.tableData() | json }} -->
+
+
+<div> table each records has a task owner. Each Group shows StatusDate or Complete  </div>
+
+ 
+<div>
+
+  <!-- <div class="controls">
+    <label for="userIdInput">Enter User ID: </label>
+    <input id="userIdInput" type="number" [ngModel]="selectedProjectId()" (ngModelChange)="selectedProjectId.set($event)"
+      min="1" />
+  </div>
+   -->
+  <!-- <app-task-owner-detail [projectListName]="projectListName()" /> -->
+   <app-task-owner-detail  />
+</div>

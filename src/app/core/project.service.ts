@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
-import { TodoSummary } from './types';
+import { TodoSummary , Todo } from './types';
 // import { environment } from '../../environments/environment';
 import { environment } from '../../environment/environment'
+
 
 interface ProjectData {
   Owner: string;
@@ -19,8 +20,8 @@ export class ProjectService {
   // https://todoapi-947367955954.europe-west1.run.app/projectlist
   private apiUrl = 'https://todoapi-947367955954.europe-west1.run.app';
   private apiUrlLocal = 'http://localhost:5173';
-  private apiUrlBase = this.apiUrl ; // environment.apiUrl;
-  //private apiUrlBase = this.apiUrlLocal;//  environment.apiUrl;
+  //private apiUrlBase = this.apiUrl ; // environment.apiUrl;
+  private apiUrlBase = this.apiUrlLocal;//  environment.apiUrl;
   //private apiUrlBase =   environment.apiUrl;
   private bucketName = 'cary-tasks';
 
@@ -28,10 +29,10 @@ export class ProjectService {
 
   // This method fetches the raw data that TanStack Query will cache
   async postTodosSummary(projectListOwner: string, projectListName: string) {
-    const apiUrl = `${this.apiUrlBase}/projectlist/all-todos-from-list?Owner=${projectListOwner}&projectListName=${projectListName}`;
+    const apiUrl = `${this.apiUrlBase}/projectlist/all-todos-summary-from-list?Owner=${projectListOwner}&projectListName=${projectListName}`;
     // const apiUrlComplete = `${apiUrl}?bucketName=${this.bucketName}&ProjectId=todos.${projectId}.json`
 
-    console.log('|project.service.ts|apiUrlComplete|getTodosSummary|', apiUrl)
+    console.log('|project.service.ts|apiUrlComplete|getTodosSummary|all-todos-summary-from-list|', apiUrl)
     var projectListObject: ProjectData = { Owner: '', Name: '', Values: '' };
     projectListObject.Owner = projectListOwner;
     projectListObject.Name = projectListName;
@@ -57,6 +58,34 @@ export class ProjectService {
     return todos;
 
   }
+
+  
+  // This method fetches the raw data that TanStack Query will cache
+  async getTodosByProjectListAndProjectOwner(projectListOwner: string, projectListName: string , taskOwnerFromRoute : string ) {
+    const apiUrl = `${this.apiUrlBase}/projectlist/all-todos-from-list?Owner=${projectListOwner}&projectListName=${projectListName}&taskOwner=${taskOwnerFromRoute}`;
+    // const apiUrlComplete = `${apiUrl}?bucketName=${this.bucketName}&ProjectId=todos.${projectId}.json`
+
+    console.log('|project.service.ts|apiUrlComplete|getTodosByProjectListAndProjectOwner|', apiUrl)
+    var projectListObject: ProjectData = { Owner: '', Name: '', Values: '' };
+    projectListObject.Owner = projectListOwner;
+    projectListObject.Name = projectListName;
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      })
+    };
+
+    const todos = await lastValueFrom(
+      this.http.post<any[]>(apiUrl , projectListObject, httpOptions)
+    );
+
+    console.log('|project.service.ts|apiUrlComplete|getTodosByProjectListAndProjectOwner|todos|', todos[0]  )
+    return todos;
+  }
+
+
   // This method fetches the raw data that TanStack Query will cache
   async getTodos(projectId: string) {
     const apiUrl = `${this.apiUrlBase}/gcs/file-contents`;

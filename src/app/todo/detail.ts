@@ -31,7 +31,7 @@ export class TodoDetailTableComponent {
   clickedRow: any;
   //selectedRowData = signal<any>({});
   onRowClick(row: any) {
-    console.log('Task Detail one Task | Row clicked:', row);
+    // console.log('Task Detail one Task | Row clicked:', row);
     //this.selectedRowData = row;
     this.clickedRow = row;
     //this.selectedRowData.set(row);
