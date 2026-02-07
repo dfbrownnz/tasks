@@ -25,7 +25,7 @@
         @for (todo of userQuery.data(); track todo.projectId + '-' + todo.id) {
         <!-- @for (todo of querykey.data() ; track todo.projectId + '-' + todo.id) { -->
         <tr (click)="onRowClick(todo)" class="clickable-row">
-          <td>{{ todo.projectId }}</td>
+          <td>{{ todo.ProjectId }}</td>
           <td>{{ todo.id }}</td>
           <td>{{ todo.name }}</td>
           <!-- <td><pre>{{ todo.Description }}</pre></td> -->

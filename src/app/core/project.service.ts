@@ -20,8 +20,8 @@ export class ProjectService {
   // https://todoapi-947367955954.europe-west1.run.app/projectlist
   private apiUrl = 'https://todoapi-947367955954.europe-west1.run.app';
   private apiUrlLocal = 'http://localhost:5173';
-  private apiUrlBase = this.apiUrl ; // environment.apiUrl;
-  //private apiUrlBase = this.apiUrlLocal;//  environment.apiUrl;
+  //private apiUrlBase = this.apiUrl ; // environment.apiUrl;
+  private apiUrlBase = this.apiUrlLocal;//  environment.apiUrl;
   //private apiUrlBase =   environment.apiUrl;
   private bucketName = 'cary-tasks';
 
@@ -64,6 +64,7 @@ export class ProjectService {
   async getTodosByProjectListAndProjectOwner(projectListOwner: string, projectListName: string , taskOwnerFromRoute : string ) {
     const apiUrl = `${this.apiUrlBase}/projectlist/all-todos-from-list?Owner=${projectListOwner}&projectListName=${projectListName}&taskOwner=${taskOwnerFromRoute}`;
     // const apiUrlComplete = `${apiUrl}?bucketName=${this.bucketName}&ProjectId=todos.${projectId}.json`
+    // this.projectOwner() ?? '' , this.projectListName() ?? '' , this.taskOwnerFromRoute() ?? ''
 
     console.log('|project.service.ts|apiUrlComplete|getTodosByProjectListAndProjectOwner|', apiUrl)
     var projectListObject: ProjectData = { Owner: '', Name: '', Values: '' };
@@ -110,8 +111,21 @@ export class ProjectService {
   // This method fetches the raw data that TanStack Query will cache
   async saveTodos(todoRecord: any) {
     const apiUrl = `${this.apiUrlBase}/gcs/file-contents`;
-    const apiUrlComplete = `${apiUrl}?bucketName=${this.bucketName}&ProjectId=todos.${todoRecord.ProjectId}.json`
-    console.log('|project.service.ts|apiUrlComplete|', apiUrlComplete, todoRecord)
+    var projectId = ''; 
+
+    console.log('|project.service.ts|saveTodos|', todoRecord.ProjectId , '||', todoRecord.projectId)
+    if( todoRecord?.ProjectId === undefined )
+    {
+       projectId = todoRecord?.projectId 
+    }
+    else
+    {
+      projectId = todoRecord?.ProjectId 
+    }
+    // ?? todoRecord.projectId
+
+    const apiUrlComplete = `${apiUrl}?bucketName=${this.bucketName}&ProjectId=todos.${projectId}.json`
+    console.log('|project.service.ts|saveTodos|apiUrlComplete|', apiUrlComplete, todoRecord , '|projectId|' , projectId)
 
 
     // 2. Define the headers explicitly

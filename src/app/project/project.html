@@ -18,18 +18,18 @@ Total Records: {{ projectList.data()?.length ?? 0 }} -->
       </mat-form-field>
     </div>
     <div class="grid grid-cols-1 gap-1">
-    <mat-form-field appearance="outline" class="w-full">
-      <mat-label>Values</mat-label>
-      <input matInput formControlName="Values" placeholder="e.g. 1,2">
-      <mat-hint>Separate values with commas</mat-hint>
-    </mat-form-field>
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Values</mat-label>
+        <input matInput formControlName="Values" placeholder="e.g. 1,2">
+        <mat-hint>Separate values with commas</mat-hint>
+      </mat-form-field>
 
-    <div class="mt-4 flex justify-end gap-2">
-      <button mat-button type="button" (click)="projectForm.reset()">Cancel</button>
-      <button mat-flat-button color="primary" type="submit" [disabled]="!projectForm.valid">
-        Save Project
-      </button>
-    </div>
+      <div class="mt-4 flex justify-end gap-2">
+        <button mat-button type="button" (click)="projectForm.reset()">Cancel</button>
+        <button mat-flat-button color="primary" type="submit" [disabled]="!projectForm.valid">
+          Save Project
+        </button>
+      </div>
     </div>
   </form>
 </div>
@@ -91,7 +91,7 @@ Total Records: {{ projectList.data()?.length ?? 0 }} -->
   <div class="table-footer">
     Total Records: {{ tableData().length }}
   </div>
-    <ul class="flex flex-col gap-2">
+  <ul class="flex flex-col gap-2">
     <h2> Project list is where you choose project-owner and list-name to url </h2>
     <li class="flex items-center gap-2">project-owner-list people in Pm - Owner. Not Task Owner </li>
     <li class="flex items-center gap-2">project-active-list projects in scope - Value. Copy template to new.</li>

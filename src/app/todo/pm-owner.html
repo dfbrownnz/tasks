@@ -26,9 +26,9 @@
       @for (item of tableData(); track item.projectId) {
       <!-- <tr (click)="onRowClick(item)" class="clickable-row"> -->
         <tr  class="clickable-row">
-        <td>{{ item.projectId }}</td>
+        <td (click)="onColumnClick(item , 'projectId')"> {{ item.projectId }}</td>
         
-        <td>{{ item.statusDate }}</td>        
+        <td (click)="onColumnClick(item , 'statusDate')"> {{ item.statusDate }}</td>        
         <td (click)="onColumnClick(item , 'approval')">{{ item.approval }}</td>
         <td (click)="onColumnClick(item , 'configuration')">{{ item.configuration }}</td>
        

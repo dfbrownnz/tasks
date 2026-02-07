@@ -87,7 +87,7 @@ export class TodoSummaryTableComponent {
 
     onColumnClick(row: TodoSummary , FieldName : string ) {
     // throw new Error('Method not implemented.');
-    // console.log('Row clicked:onConfigurationClick|projectPicked|', row , FieldName );
+    console.log('Row clicked:pm-owner|onColumnClick|', row , FieldName );
 
      this.projectPicked.emit(row);
     this.selectedProjectId.set(row.projectId);
