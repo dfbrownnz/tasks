@@ -78,7 +78,7 @@ export class TaskOwner {
 
   
   readonly columns: ColumnDef<any>[] = [
-    { accessorKey: 'projectId', header: 'projectId' },
+    { accessorKey: 'projectId', header: 'ProjectId' },
     { accessorKey: 'statusDate', header: 'statusDate' },
     { accessorKey: 'approval', header: 'approval' },
     { accessorKey: 'configuration', header: 'configuration' },
@@ -105,6 +105,7 @@ export class TaskOwner {
   onColumnClick(row: TodoSummary, FieldName: string) {
 
     this.projectPicked.emit(row);
+    console.log( "{row.projectId}" , row )
     // this.selectedProjectId.set(row.projectId);
     // this.selectedGroup.set(FieldName);
 

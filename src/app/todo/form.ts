@@ -25,6 +25,7 @@ export class TaskFormComponent {
 
   private projectService = inject(ProjectService);
 
+
   // Initialize the form with fields matching your data keys  ProjectId: [''],
   projectForm = this.fb.group({
     ProjectId: [''],
@@ -43,27 +44,36 @@ export class TaskFormComponent {
 
 
   ngOnChanges(changes: SimpleChanges) {
+    const task = changes['selectedRowFormData'].currentValue;
+
+
+    if (task?.hasOwnProperty('projectId')) {
+      console.log('It is lowercase: projectId');
+    } else if (task?.hasOwnProperty('ProjectId')) {
+      console.log('It is PascalCase: ProjectId');
+    }
+
     if (changes['selectedRowFormData'] && changes['selectedRowFormData'].currentValue) {
       // console.log('form | ngOnChanges triggered', changes['selectedRowFormData'].currentValue);
-      if(changes['selectedRowFormData'].currentValue.projectId === undefined  )
-      {
-        this.projectForm.patchValue(changes['selectedRowFormData'].currentValue); 
+      if (changes['selectedRowFormData'].currentValue.projectId === undefined) {
+        this.projectForm.patchValue(changes['selectedRowFormData'].currentValue);
       }
-      else{
+      else {
 
-          this.projectForm.patchValue({
-        ProjectId:  changes['selectedRowFormData'].currentValue.projectId,
-        Id: changes['selectedRowFormData'].currentValue.id,
-        Description: changes['selectedRowFormData'].currentValue.description,
-        Name: changes['selectedRowFormData'].currentValue.name,
-        Group: changes['selectedRowFormData'].currentValue.group,
-        Owner: changes['selectedRowFormData'].currentValue.owner,
-        StatusFlag: changes['selectedRowFormData'].currentValue.statusFlag,
-        StatusDate: changes['selectedRowFormData'].currentValue.statusDate
-      });
+        this.projectForm.patchValue({
+          // ProjectId: changes['selectedRowFormData'].currentValue.ProjectId,
+          ProjectId: changes['selectedRowFormData'].currentValue.projectId,
+          Id: changes['selectedRowFormData'].currentValue.id,
+          Description: changes['selectedRowFormData'].currentValue.description,
+          Name: changes['selectedRowFormData'].currentValue.name,
+          Group: changes['selectedRowFormData'].currentValue.group,
+          Owner: changes['selectedRowFormData'].currentValue.owner,
+          StatusFlag: changes['selectedRowFormData'].currentValue.statusFlag,
+          StatusDate: changes['selectedRowFormData'].currentValue.statusDate
+        });
 
       }
-    
+
 
     }
   }
@@ -92,23 +102,31 @@ export class TaskFormComponent {
 
   async onSave() {
 
-    const ex = { ...this.projectForm.getRawValue(), ProjectId: this.selectedRowFormData?.ProjectId ?? this.selectedRowFormData.projectId  };
+    const ex = { ...this.projectForm.getRawValue(), ProjectId: this.selectedRowFormData?.ProjectId ?? this.selectedRowFormData.projectId };
 
     (await
 
       this.projectService.saveTodos(ex)).subscribe({
         next: () => {
-          console.log('Save successful');
+
+          console.log('Save successful|2|', this.selectedRowFormData?.ProjectId);
+          console.log('Save successful|3|', this.selectedRowFormData?.projectId);
 
           // 1. Clear the form values
           this.projectForm.reset();
 
           // 2. Refresh the table data
           //this.queryClient.invalidateQueries({ queryKey: ['projects'] }); 'todo-owner'
-          this.queryClient.invalidateQueries({ queryKey: ['todo-detail', this.selectedRowFormData?.ProjectId  ] });
-          this.queryClient.invalidateQueries({ queryKey: ['todo-summary'] });
-          this.queryClient.invalidateQueries({ queryKey: ['todo-owner'] });
-
+          // this.queryClient.invalidateQueries({ queryKey: ['todo-detail', this.selectedRowFormData?.ProjectId] });
+          this.queryClient.invalidateQueries({ queryKey: ['todo-detail', this.selectedRowFormData?.ProjectId] });
+          this.queryClient.invalidateQueries({ queryKey: ['todo-detail', this.selectedRowFormData?.projectId] });
+          this.queryClient.invalidateQueries({ queryKey: ['todo-summary', this.selectedRowFormData?.projectId, this.selectedRowFormData?.ProjectId] });
+          this.queryClient.invalidateQueries({ queryKey: ['todo-owner' , this.selectedRowFormData?.projectId ] });
+          this.queryClient.invalidateQueries({ queryKey: ['todo-detail-owner'  ] });
+          // this.queryClient.invalidateQueries({ queryKey: ['todo-detail-owner' , this.selectedRowFormData?.projectId ] });
+          // this.queryClient.invalidateQueries({ queryKey: ['todo-detail-owner' , this.selectedRowFormData?.ProjectId ] });
+          // ['todo-detail-owner'
+// 
           // 'todo-summary'
           // 'todo-detail', this.selectedRowFormData.ProjectId
 

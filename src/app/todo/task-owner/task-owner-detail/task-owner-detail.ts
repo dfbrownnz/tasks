@@ -45,7 +45,7 @@ export class TaskOwnerDetail {
     
     
     queryKey: ['todo-detail-owner',   this.projectOwner() , this.projectListName() , this.taskOwnerFromRoute() ], // Ensure this signal has a value
-    queryFn: () => this.projectService.getTodosByProjectListAndProjectOwner(  this.projectListName() ?? '' ,this.projectOwner() ?? '' ,  this.taskOwnerFromRoute() ?? ''),
+    queryFn: () => this.projectService.getTodosByProjectListAndProjectOwner( this.projectOwner() ?? '' ,  this.projectListName() ?? '' ,  this.taskOwnerFromRoute() ?? ''),
     enabled: !!this.projectOwner() && !!this.projectListName() && !! this.taskOwnerFromRoute() , // Only run if 'bob' is found
   }));
 
